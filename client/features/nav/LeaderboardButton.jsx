@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Map () {
+export default function LeaderboardButton () {
   return (
     <div>
-    🗺️
+    👑
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Map from './Map'
-import Camera from './Camera'
+import Map from './MapButton'
+import CameraButton from './CameraButton'
 
 export default function Footer () {
   return (
@@ -10,10 +10,10 @@ export default function Footer () {
         <Map />
       </button></li>
       <li className="flex-grow list-none"><button>
-        <Camera />
+        <CameraButton />
       </button></li>
       <li className="flex-none list-none"><button>
-        <Camera />
+        <CameraButton />
       </button></li>
     </footer>
   )

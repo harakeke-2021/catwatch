@@ -52,6 +52,8 @@
     "tailwindcss": "^2.0.3"
   },
   "dependencies": {
-    "parcel": "^2.0.0-nightly.607"
+    "leaflet": "^1.7.1",
+    "parcel": "^2.0.0-nightly.607",
+    "react-leaflet": "^3.1.0"
   }
 }
