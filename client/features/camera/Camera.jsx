@@ -2,20 +2,40 @@ import React, { useState } from 'react'
 
 function Camera () {
   const [img, setImg] = useState(null)
+  const [caption, setCaption] = useState('')
 
-  function onChange (e) {
+  function addImg (e) {
     setImg(e.target.files[0])
   }
+
+  function addCaption (e) {
+    const { value } = e.target
+    setCaption(value)
+  }
+
+  function resetForm () {
+    setImg(null)
+    setCaption('')
+  }
+
+  function submitForm () {
+    console.log(URL.createObjectURL(img))
+    console.log(caption)
+  }
+
   return (
-    <>
-      <h2>hello world!</h2>
-      <input type="file" id="imageFile" capture="environment" accept="image/*" onChange={onChange}/>
+    <form onSubmit={submitForm}>
+      <button onClick={resetForm}>Back</button>
       {
         img
-          ? <img src={URL.createObjectURL(img)}/>
-          : <p>no image specified</p>
+          ? (<>
+            <img src={URL.createObjectURL(img)}/>
+            <input type='text' placeholder='caption' value={caption} onChange={addCaption}/>
+            <button type='submit'>Submit</button>
+          </>)
+          : <input type='file' id='imageFile' capture='environment' accept='image/*' onChange={addImg}/>
       }
-    </>
+    </form>
   )
 }
 
