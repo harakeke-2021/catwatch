@@ -4,6 +4,7 @@ import Feed from './features/feed/Feed'
 import Nav from './features/nav/Nav'
 
 import './style.css'
+import '@fortawesome/fontawesome-free/js/all'
 
 export default function App () {
   return (<>
