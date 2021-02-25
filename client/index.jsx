@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import App from './App'
 import store from './store'
+import 'leaflet/dist/leaflet.css'
 require('dotenv').config()
 
 if (module.hot) {

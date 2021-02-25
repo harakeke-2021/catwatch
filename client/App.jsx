@@ -7,6 +7,7 @@ import Login from './features/auth/Login'
 import { AuthProvider } from './features/auth/GetAuthState'
 import PrivateRoute from './features/auth/PrivateRoute'
 import User from './features/user/User'
+import MapView from './features/map/MapView'
 
 import './style.css'
 import '@fortawesome/fontawesome-free/css/all.css'
@@ -20,6 +21,7 @@ export default function App () {
           <Route exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
           <Route path="/user" component={User}/>
+          <Route path='/map' component={MapView}/>
         </Nav>
       </div>
     </AuthProvider>
