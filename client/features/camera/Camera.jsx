@@ -1,25 +1,30 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { setImg, setCaption } from './camProtoSlice'
 
 function Camera () {
-  const [img, setImg] = useState(null)
-  const [caption, setCaption] = useState('')
+  const { img, caption } = useSelector(state => state.camera)
+  const dispatch = useDispatch()
 
   function addImg (e) {
-    setImg(e.target.files[0])
+    const img = e.target.files[0]
+    const imgURL = URL.createObjectURL(img)
+    dispatch(setImg(imgURL))
   }
 
   function addCaption (e) {
     const { value } = e.target
-    setCaption(value)
+    dispatch(setCaption(value))
   }
 
   function resetForm () {
-    setImg(null)
-    setCaption('')
+    dispatch(setImg(''))
+    dispatch(setCaption(''))
   }
 
   function submitForm () {
-    console.log(URL.createObjectURL(img))
+    console.log(img)
     console.log(caption)
   }
 
@@ -29,7 +34,7 @@ function Camera () {
       {
         img
           ? (<>
-            <img src={URL.createObjectURL(img)}/>
+            <img src={img}/>
             <input type='text' placeholder='caption' value={caption} onChange={addCaption}/>
             <button type='submit'>Submit</button>
           </>)
