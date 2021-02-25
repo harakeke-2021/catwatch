@@ -20,6 +20,7 @@
       "dist/"
     ]
   },
+  "browserslist": "> 0.2%",
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -33,6 +34,7 @@
     "@parcel/packager-html": "^2.0.0-nightly.609",
     "@parcel/transformer-css": "^2.0.0-nightly.609",
     "@parcel/transformer-html": "^2.0.0-nightly.609",
+    "@parcel/transformer-image": "^2.0.0-nightly.2231",
     "@parcel/transformer-postcss": "^2.0.0-nightly.609",
     "@parcel/transformer-posthtml": "^2.0.0-nightly.609",
     "@reduxjs/toolkit": "^1.5.0",

@@ -1,7 +1,14 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import FeedPost from './FeedPost'
 export default function Feed () {
-  const count = useSelector(state => state.feed.value)
+  const items = ['ya boi kenneth', 'bob', 'fred']
 
-  return (<h2 className="p-4">{count} is cool</h2>)
+  return (
+    <main className="divide-y divide-gray-100">
+      {items.map(item =>
+        <FeedPost key={item} item={item} />
+      )}
+
+    </main>
+  )
 }
