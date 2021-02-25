@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel serve ./client/index.html",
+    "dev:sec": "npm run dev -- --https",
     "test": "jest"
   },
   "repository": {
