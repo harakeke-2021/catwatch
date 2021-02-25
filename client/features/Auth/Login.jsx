@@ -1,44 +1,35 @@
 import React, { useState } from 'react'
+import { Route } from 'react-router'
 import app from '../../firebase'
 
-function Register () {
+function Login () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const auth = app.auth()
-  const db = app.firestore()
 
-  function handleSignup (e) {
+  function handleLogin (e) {
     e.preventDefault()
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(data => firestoreSignUp(data))
+    auth.signInWithEmailAndPassword(email, password)
+      .then(() => setEmail(''))
+      .then(() => setPassword(''))
       .catch(error => {
         console.log(error)
       })
   }
 
-  function firestoreSignUp (data) {
-    const uid = data.user.uid
-    const userData = { email: email, id: uid }
-    return db.collection('users').doc(uid).set(userData)
-      .then(() => console.log('new user created so redirect'))
-      .then(() => setEmail(''))
-      .then(() => setPassword(''))
-      .catch(error => { console.log(error) })
-  }
-
   return (
     <div>
-      <h2>Register</h2>
+      <h2>Login In</h2>
       <form id="form">
         <label htmlFor="email">Email</label>
         <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)}/>
         <label htmlFor="password">Password</label>
         <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)}/>
-        <button type="submit" onClick={handleSignup}>Sign up</button>
+        <button type="submit" onClick={handleLogin}>Login</button>
       </form>
     </div>
   )
 }
 
-export default Register
+export default Login
