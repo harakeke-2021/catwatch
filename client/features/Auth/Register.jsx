@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import app from '../../firebase'
 
 function Register () {
@@ -37,6 +38,9 @@ function Register () {
         <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)}/>
         <button type="submit" onClick={handleSignup}>Sign up</button>
       </form>
+      <div>
+        <Link to="/login"><p>Already got an account? Login here</p></Link>
+      </div>
     </div>
   )
 }

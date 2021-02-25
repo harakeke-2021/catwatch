@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Route } from 'react-router'
+import { Link } from 'react-router-dom'
 import app from '../../firebase'
 
 function Login () {
@@ -28,6 +28,7 @@ function Login () {
         <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)}/>
         <button type="submit" onClick={handleLogin}>Login</button>
       </form>
+      <Link to="/register"><p>No account? Register here</p></Link>
     </div>
   )
 }
