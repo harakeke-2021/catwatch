@@ -1,25 +1,16 @@
 import React from 'react'
-import Profile from './Profile'
-import Leaderboard from './Leaderboard'
 import Logo from './Logo'
 import Logout from '../Auth/Logout'
+import NavButton from './NavButton'
 
 export default function Header () {
   return (
-    <div>
-      <header className="flex flex-row py-5 text-center text-white bg-gray-700">
-        <li className="flex-none list-none"><button>
-          <Leaderboard/>
-        </button></li>
-        <li className="flex-grow list-none"><button>
-          <Logo />
-        </button></li>
-        <li className="flex-none list-none" > <button>
-          <Profile />
-        </button></li>
-        <Logout/>
-
-      </header>
-    </div>
+    <header className="text-6xl shadow-lg">
+      <div className="flex justify-between p-8 px-12">
+        <NavButton target="/leaderboard" className="fas fa-trophy" />
+        <Logo/>
+        <NavButton target="/user" className="fas fa-user"/>
+      </div>
+    </header>
   )
 }

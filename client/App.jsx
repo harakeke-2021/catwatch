@@ -9,6 +9,7 @@ import { AuthProvider } from './features/Auth/GetAuthState'
 import PrivateRoute from './features/Auth/PrivateRoute'
 
 import './style.css'
+import '@fortawesome/fontawesome-free/css/all.css'
 
 export default function App () {
   return (<>

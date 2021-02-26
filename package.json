@@ -54,6 +54,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "firebase": "^8.2.9",
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "parcel": "^2.0.0-nightly.607"
   }
 }
