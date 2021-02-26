@@ -16,7 +16,10 @@ function CamBtn () {
   }
 
   return (
-    <input type='file' id='imageFile' capture='environment' accept='image/*' onChange={addImg}/>
+    <div>
+      <label htmlFor='image' className='relative items-center justify-center block w-40 h-5 font-bold text-white shadow-md cursor-pointer rounded-xl bg-gradient-to-bl from-pink-400 to-indigo-500 transition-transform'>this is the label</label>
+      <input id='image' className='absolute invisible w-1 h-1 opacity-0' type='file' capture='environment' accept='image/*' onChange={addImg}/>
+    </div>
   )
 }
 
