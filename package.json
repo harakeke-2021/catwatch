@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "parcel serve --https ./client/index.html",
     "test": "jest"
+    
   },
   "repository": {
     "type": "git",
