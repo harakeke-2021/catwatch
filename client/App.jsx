@@ -8,7 +8,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 
 export default function App () {
   return (<>
-    <div className="flex flex-col h-screen">
+    <div className="fixed flex flex-col h-full">
       <Nav>
         <Route path="/" component={Feed}/>
       </Nav>
