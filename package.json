@@ -4,7 +4,7 @@
   "description": "catwatch!",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel serve ./client/index.html",
+    "dev": "parcel serve --https ./client/index.html",
     "test": "jest"
   },
   "repository": {
@@ -57,6 +57,8 @@
     "@fortawesome/fontawesome-free": "^5.15.2",
     "dotenv": "^8.2.0",
     "firebase": "^8.2.9",
-    "parcel": "^2.0.0-nightly.607"
+    "leaflet": "^1.7.1",
+    "parcel": "^2.0.0-nightly.607",
+    "react-leaflet": "^3.1.0"
   }
 }
