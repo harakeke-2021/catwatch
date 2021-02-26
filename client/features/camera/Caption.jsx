@@ -20,9 +20,11 @@ function Caption () {
     history.push('/')
   }
 
-  function submitForm () {
-    console.log(img)
-    console.log(caption)
+  function submitForm (e) {
+    e.preventDefault()
+    console.log('img URL:', img)
+    console.log('caption:', caption)
+    history.push('/')
   }
 
   return (
@@ -32,7 +34,11 @@ function Caption () {
       </div>
       <img src={img}/>
       <div>
-        <input type='text' placeholder='caption' value={caption} onChange={addCaption}/>
+        <textarea name='caption' placeholder='caption' value={caption} style={{
+          boxSizing: 'border-box',
+          width: '100%'
+        }} onChange={addCaption}>
+        </textarea>
       </div>
       <div>
         <button type='submit'>Submit</button>
