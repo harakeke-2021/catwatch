@@ -1,48 +1,52 @@
-import React, { useState } from 'react'
+import React, { useCallback, useContext } from 'react'
+import { withRouter, Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import app from '../../firebase'
+import { AuthContext } from './GetAuthState'
 
-function Register () {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+function Register ({ history }) {
+  const handleRegister = useCallback(
+    async event => {
+      event.preventDefault()
+      const { email, password } = event.target.elements
+      try {
+        const userAuth = await app.auth().createUserWithEmailAndPassword(email.value, password.value)
 
-  const auth = app.auth()
-  const db = app.firestore()
+        await app.firestore().collection('users').doc(userAuth.user.uid).set({
+          email: email.value,
+          id: userAuth.user.uid
+        })
+        history.push('/')
+      } catch (error) {
+        alert(error)
+      }
+    },
+    [history]
+  )
 
-  function handleSignup (e) {
-    e.preventDefault()
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(data => firestoreSignUp(data))
-      .catch(error => {
-        console.log(error)
-      })
-  }
+  const { currentUser } = useContext(AuthContext)
 
-  function firestoreSignUp (data) {
-    const uid = data.user.uid
-    const userData = { email: email, id: uid }
-    return db.collection('users').doc(uid).set(userData)
-      .then(() => console.log('new user created so redirect'))
-      .then(() => setEmail(''))
-      .then(() => setPassword(''))
-      .catch(error => { console.log(error) })
+  if (currentUser) {
+    return <Redirect to="/" />
   }
 
   return (
     <div>
-      <h2>Register</h2>
-      <form id="form">
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)}/>
-        <label htmlFor="password">Password</label>
-        <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)}/>
-        <button type="submit" onClick={handleSignup}>Sign up</button>
+      <h1>Sign up</h1>
+      <form onSubmit={handleRegister}>
+        <label>
+      Email
+          <input name="email" type="email" placeholder="Email" autoComplete="on" />
+        </label>
+        <label>
+      Password
+          <input name="password" type="password" placeholder="Password" autoComplete="on" />
+        </label>
+        <button type="submit">Sign Up</button>
       </form>
-      <div>
-        <Link to="/login"><p>Already got an account? Login here</p></Link>
-      </div>
+      <Link to="/login"><p>Already part of CATWATCH? Login here</p></Link>
     </div>
   )
 }
 
-export default Register
+export default withRouter(Register)

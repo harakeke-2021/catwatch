@@ -5,7 +5,7 @@ import Feed from './features/feed/Feed'
 import Nav from './features/nav/Nav'
 import Register from './features/Auth/Register'
 import Login from './features/Auth/Login'
-import { AuthProvider } from './features/Auth/getAuthState'
+import { AuthProvider } from './features/Auth/GetAuthState'
 import PrivateRoute from './features/Auth/PrivateRoute'
 
 import './style.css'

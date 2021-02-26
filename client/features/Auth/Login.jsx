@@ -2,9 +2,9 @@ import React, { useCallback, useContext } from 'react'
 import { withRouter, Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import app from '../../firebase'
-import { AuthContext } from './getAuthState'
+import { AuthContext } from './GetAuthState'
 
-const Login = ({ history }) => {
+function Login ({ history }) {
   const handleLogin = useCallback(
     async event => {
       event.preventDefault()
@@ -33,16 +33,15 @@ const Login = ({ history }) => {
       <form onSubmit={handleLogin}>
         <label>
           Email
-          <input name="email" type="email" placeholder="Email" />
+          <input name="email" type="email" placeholder="Email" autoComplete="on" />
         </label>
         <label>
           Password
-          <input name="password" type="password" placeholder="Password" />
+          <input name="password" type="password" placeholder="Password" autoComplete="on"/>
         </label>
         <button type="submit">Log in</button>
       </form>
-      {/* <p>No Account? Register here</p> */}
-      <Link to="/register"><p>No Account? Reigster here</p></Link>
+      <Link to="/register"><p>No Account? Register here</p></Link>
     </div>
   )
 }
