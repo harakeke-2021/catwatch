@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 html {
-  font-size: 20px
+  font-size: 20px;
 } 
 
 @layer utilities {

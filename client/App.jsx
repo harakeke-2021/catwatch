@@ -14,7 +14,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 export default function App () {
   return (<>
     <AuthProvider>
-      <div className="flex flex-col h-screen">
+      <div className="fixed flex flex-col h-full">
         <Nav>
           <PrivateRoute exact path="/" component={Feed}/>
           <Route exact path="/login" component={Login}/>
