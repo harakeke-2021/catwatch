@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route } from 'react-router'
-import { BrowserRouter as Router } from 'react-router-dom'
 import Feed from './features/feed/Feed'
 import Nav from './features/nav/Nav'
 import Register from './features/auth/Register'
@@ -15,16 +14,14 @@ import '@fortawesome/fontawesome-free/css/all.css'
 export default function App () {
   return (<>
     <AuthProvider>
-      <Router>
-        <div className="flex flex-col h-screen">
-          <Nav>
-            <PrivateRoute exact path="/" component={Feed}/>
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/register" component={Register}/>
-            <Route path="/user" component={User}/>
-          </Nav>
-        </div>
-      </Router>
+      <div className="flex flex-col h-screen">
+        <Nav>
+          <PrivateRoute exact path="/" component={Feed}/>
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/register" component={Register}/>
+          <Route path="/user" component={User}/>
+        </Nav>
+      </div>
     </AuthProvider>
   </>)
 }
