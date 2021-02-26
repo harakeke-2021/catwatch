@@ -13,7 +13,7 @@ export default function App () {
     <div className="flex flex-col h-screen">
       <Nav>
         <Route exact path="/" component={Feed}/>
-        <Route path='/capture' component={Camera}/>
+        <Route path='/camera' component={Camera}/>
       </Nav>
     </div>
   </>)

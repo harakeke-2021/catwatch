@@ -12,7 +12,7 @@ function CamBtn () {
     const img = e.target.files[0]
     const imgURL = URL.createObjectURL(img)
     dispatch(setImg(imgURL))
-    history.push('/caption')
+    history.push('/camera/caption')
   }
 
   return (

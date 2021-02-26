@@ -9,7 +9,7 @@ function Caption () {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  function addCaption (e) {
+  function onChange (e) {
     const { value } = e.target
     dispatch(setCaption(value))
   }
@@ -24,7 +24,7 @@ function Caption () {
     e.preventDefault()
     console.log('img URL:', img)
     console.log('caption:', caption)
-    history.push('/')
+    resetForm()
   }
 
   return (
@@ -37,7 +37,7 @@ function Caption () {
         <textarea name='caption' placeholder='caption' value={caption} style={{
           boxSizing: 'border-box',
           width: '100%'
-        }} onChange={addCaption}>
+        }} onChange={onChange}>
         </textarea>
       </div>
       <div>

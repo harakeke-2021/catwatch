@@ -7,8 +7,8 @@ import Caption from './Caption'
 function Camera () {
   return (
     <>
-      <Route exact path="/" component={CamBtn}/>
-      <Route path='/caption' component={Caption}/>
+      <Route exact path="/camera" component={CamBtn}/>
+      <Route path='/camera/caption' component={Caption}/>
     </>
   )
 }
