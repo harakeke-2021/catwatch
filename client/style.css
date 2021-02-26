@@ -3,4 +3,11 @@
 @import "tailwindcss/utilities";
 html {
   font-size: 20px
+} 
+
+@layer utilities {
+  .text-gradient {
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
