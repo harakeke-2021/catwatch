@@ -1,10 +1,17 @@
 import React from 'react'
 import { Marker } from 'react-leaflet'
-
 import { IconLocation } from './IconLocation'
 
-export default function Markers () {
-  return (
-    <Marker position={{ lat: '-36.8750570540076', lng: '174.76811551843952', icon: { IconLocation } }} />
-  )
+
+// import data from '../../static/data.json'
+// const { places } = JSON.parse(data)
+
+const Markers = (props) => {
+  const { places } = props
+  const markers = places.map((place, i) => (
+    <Marker key={i} position={place.geometry} icon={IconLocation} />
+  ))
+  return markers
 }
+
+export default Markers
