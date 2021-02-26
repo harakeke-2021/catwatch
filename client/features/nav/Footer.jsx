@@ -10,6 +10,7 @@ export default function Footer () {
         <NavButton target="/camera" className="fas fa-camera" />
         <NavButton target="/" className="fas fa-fish" />
       </div>
+
     </footer>
   )
 }

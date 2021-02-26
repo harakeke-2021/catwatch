@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import App from './App'
 import store from './store'
 require('dotenv').config()
+import 'leaflet/dist/leaflet.css'
 
 if (module.hot) {
   module.hot.accept()
