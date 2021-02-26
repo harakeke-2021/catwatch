@@ -8,6 +8,8 @@ import { AuthProvider } from './features/auth/GetAuthState'
 import PrivateRoute from './features/auth/PrivateRoute'
 import User from './features/user/User'
 import MapView from './features/map/MapView'
+import Geolocation from './features/map/Geolocation'
+import Router from 'react-dom'
 
 import './style.css'
 import '@fortawesome/fontawesome-free/css/all.css'

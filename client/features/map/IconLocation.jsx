@@ -1,8 +1,9 @@
-import { L } from 'leaflet'
+import L from 'leaflet'
+import Icon from 'url:../../static/Icon2.svg'
 
 export const IconLocation = L.icon({
-  iconUrl: require('dist/Icon.svg'),
-  iconRetinaUrl: require('dist/Icon.svg'),
+  iconUrl: Icon,
+  iconRetinaUrl: Icon,
   iconAnchor: null,
   shadowUrl: null,
   shadowSize: null,
@@ -10,5 +11,3 @@ export const IconLocation = L.icon({
   iconSize: [35, 35],
   className: 'leaflet-venue-icon'
 })
-
-//cannot import the icon x.x
