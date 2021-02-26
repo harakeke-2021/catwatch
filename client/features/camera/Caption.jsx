@@ -1,22 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { setImg, setCaption } from './camProtoSlice'
+import { setImg } from './camProtoSlice'
 
 function Caption () {
-  const { img, caption } = useSelector(state => state.camera)
+  const img = useSelector(state => state.camera.img)
+  const [caption, setCaption] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
 
   function onChange (e) {
     const { value } = e.target
-    dispatch(setCaption(value))
+    setCaption(value)
   }
 
   function resetForm () {
     dispatch(setImg(''))
-    dispatch(setCaption(''))
     history.push('/')
   }
 
