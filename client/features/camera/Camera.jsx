@@ -1,22 +1,15 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { Route } from 'react-router'
 
-import { setImg } from './camProtoSlice'
+import CamBtn from './CamBtn'
+import Caption from './Caption'
 
 function Camera () {
-  const dispatch = useDispatch()
-  const history = useHistory()
-
-  function addImg (e) {
-    const img = e.target.files[0]
-    const imgURL = URL.createObjectURL(img)
-    dispatch(setImg(imgURL))
-    history.push('/caption')
-  }
-
   return (
-    <input type='file' id='imageFile' capture='environment' accept='image/*' onChange={addImg}/>
+    <>
+      <Route exact path="/" component={CamBtn}/>
+      <Route path='/caption' component={Caption}/>
+    </>
   )
 }
 
