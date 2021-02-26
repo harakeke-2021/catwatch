@@ -4,7 +4,7 @@
   "description": "catwatch!",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel serve ./client/index.html",
+    "dev": "parcel serve --https ./client/index.html",
     "test": "jest"
   },
   "repository": {
