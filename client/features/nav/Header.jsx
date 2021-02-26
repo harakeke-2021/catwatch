@@ -4,8 +4,8 @@ import NavButton from './NavButton'
 
 export default function Header () {
   return (
-    <header className="text-6xl shadow-lg">
-      <div className="flex justify-between p-8 px-12">
+    <header className="text-2xl shadow-lg">
+      <div className="flex items-center justify-between p-2 px-3">
         <NavButton target="/leaderboard" className="fas fa-trophy" />
         <Logo/>
         <NavButton target="/user" className="fas fa-user"/>

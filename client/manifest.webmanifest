@@ -1,0 +1,19 @@
+{
+  "lang": "en-US",
+  "name": "CATWATCH",
+  "short_name": "catwatch",
+  "description": "we watch cats",
+  "scope": "/",
+  "start_url": "/?standalone=true",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
