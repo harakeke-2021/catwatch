@@ -6,7 +6,6 @@ function Logout () {
 
   function handleLogout () {
     auth.signOut()
-      .then(() => console.log('logged out the user - need to redirect'))
       .catch(err => console.error(err))
   }
 

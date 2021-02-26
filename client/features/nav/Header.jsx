@@ -2,6 +2,7 @@ import React from 'react'
 import Profile from './Profile'
 import Leaderboard from './Leaderboard'
 import Logo from './Logo'
+import Logout from '../Auth/Logout'
 
 export default function Header () {
   return (
@@ -16,6 +17,7 @@ export default function Header () {
         <li className="flex-none list-none" > <button>
           <Profile />
         </button></li>
+        <Logout/>
 
       </header>
     </div>
