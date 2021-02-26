@@ -1,20 +1,16 @@
 import React from 'react'
-
-import Map from './MapButton'
-import CameraButton from './CameraButton'
+import NavButton from './NavButton'
 
 export default function Footer () {
   return (
-    <footer className="flex flex-row py-5 text-center text-white bg-gray-700">
-      <li className="flex-none list-none"><button>
-        <Map />
-      </button></li>
-      <li className="flex-grow list-none"><button>
-        <CameraButton />
-      </button></li>
-      <li className="flex-none list-none"><button>
-        <CameraButton />
-      </button></li>
+    <footer className="text-2xl shadow-lg transform rotate-180">
+      <div className="flex justify-between p-2 px-6 transform rotate-180">
+        {/* map camera feed */}
+        <NavButton target="/map" className="fas fa-map" />
+        <NavButton target="/camera" className="fas fa-camera" />
+        <NavButton target="/" className="fas fa-fish" />
+      </div>
+
     </footer>
   )
 }

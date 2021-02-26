@@ -32,11 +32,13 @@
     "@parcel/optimizer-htmlnano": "^2.0.0-nightly.609",
     "@parcel/packager-css": "^2.0.0-nightly.609",
     "@parcel/packager-html": "^2.0.0-nightly.609",
+    "@parcel/packager-raw-url": "^2.0.0-nightly.2231",
     "@parcel/transformer-css": "^2.0.0-nightly.609",
     "@parcel/transformer-html": "^2.0.0-nightly.609",
     "@parcel/transformer-image": "^2.0.0-nightly.2231",
     "@parcel/transformer-postcss": "^2.0.0-nightly.609",
     "@parcel/transformer-posthtml": "^2.0.0-nightly.609",
+    "@parcel/transformer-webmanifest": "^2.0.0-nightly.2231",
     "@reduxjs/toolkit": "^1.5.0",
     "autoprefixer": "^10.2.4",
     "eslint": "^7.20.0",
@@ -52,6 +54,9 @@
     "tailwindcss": "^2.0.3"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "dotenv": "^8.2.0",
+    "firebase": "^8.2.9",
     "leaflet": "^1.7.1",
     "parcel": "^2.0.0-nightly.607",
     "react-leaflet": "^3.1.0"
