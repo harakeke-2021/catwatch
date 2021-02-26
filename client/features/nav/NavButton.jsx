@@ -11,17 +11,13 @@ export default function NavButton ({ className, target }) {
     history.push(target)
   }
 
-  return routeMatch ? (
-    <div className="flex p-2 rounded-xl bg-gradient-to-r from-pink-400 to-indigo-500">
-      <div className="flex p-3 bg-white rounded-lg">
-        <button onClick={navigate} className={className}></button>
+  return (
+    <div onClick={navigate} className={`p-2 rounded-xl ${routeMatch ? 'bg-gradient-to-r from-pink-400 to-indigo-500' : ''}`}>
+      {/* <div className="flex justify-center w-20 h-20 p-3 bg-white rounded-lg"> */}
+      <div className="flex items-center justify-center w-20 h-20">
+        <div className={`${className} ${routeMatch ? 'text-white' : 'text-gradient bg-gradient-to-r from-pink-400 to-indigo-500'}`}></div>
       </div>
-    </div>
-  ) : (
-    <div className="flex p-2">
-      <div className="flex p-3 rounded-lg">
-        <button onClick={navigate} className={className}></button>
-      </div>
+      {/* </div> */}
     </div>
   )
 }
