@@ -18,5 +18,6 @@ const cameraSlice = createSlice({
 
 export default cameraSlice.reducer
 export const {
-  setImg
+  setImg,
+  setCaption
 } = cameraSlice.actions
