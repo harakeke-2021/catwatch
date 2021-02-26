@@ -31,21 +31,23 @@ function Register ({ history }) {
   }
 
   return (
-    <div>
-      <h1>Sign up</h1>
-      <form onSubmit={handleRegister}>
-        <label>
-      Email
-          <input name="email" type="email" placeholder="Email" autoComplete="on" />
-        </label>
-        <label>
-      Password
-          <input name="password" type="password" placeholder="Password" autoComplete="on" />
-        </label>
-        <button type="submit">Sign Up</button>
-      </form>
-      <Link to="/login"><p>Already part of CATWATCH? Login here</p></Link>
-    </div>
+    <section>
+      <div>
+        <h1>Sign up</h1>
+        <form onSubmit={handleRegister}>
+          <label>Email
+            <input name="email" type="email" placeholder="Email" autoComplete="on" />
+          </label>
+
+          <label>Password
+            <input name="password" type="password" placeholder="Password" autoComplete="on" />
+          </label>
+
+          <button type="submit">Sign Up</button>
+        </form>
+        <Link to="/login"><p>Already part of CATWATCH? Login here</p></Link>
+      </div>
+    </section>
   )
 }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import Logo from './Logo'
-import Logout from '../Auth/Logout'
 import NavButton from './NavButton'
 
 export default function Header () {
