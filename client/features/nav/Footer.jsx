@@ -8,7 +8,7 @@ export default function Footer () {
         {/* map camera feed */}
         <NavButton target="/map" className="fas fa-map" />
         <NavButton target="/camera" className="fas fa-camera" />
-        <NavButton target="/" className="fas fa-fish" />
+        <NavButton target="/feed" className="fas fa-fish" />
       </div>
 
     </footer>
