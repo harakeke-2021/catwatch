@@ -4,13 +4,8 @@
   "description": "catwatch!",
   "scripts": {
     "dev": "parcel serve --https ./client/index.html",
-<<<<<<< HEAD
-    "test": "jest"
-    
-=======
     "test": "jest",
     "build": "parcel build ./client/index.html"
->>>>>>> main
   },
   "repository": {
     "type": "git",
