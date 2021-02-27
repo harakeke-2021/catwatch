@@ -39,15 +39,18 @@ function User () {
     setUserSightings(list)
   }
 
-  console.log(userSightings)
+  // location.x_ = latitude
+  // location.N_ = longitude
 
   return (
     <>
-      <h3>Email:</h3>{userDetails.email}
-      <p>this is the users page</p>
+      <p>this is the users page for: {userDetails.email}</p>
       {userSightings.map((result, index) => (
         <div key={index}>
           <img src={result.photoUrl} alt="catpic"/>
+          {result.location.x_}
+          <br></br>
+          {result.location.N_}
         </div>
       ))}
       <Logout/>
