@@ -21,13 +21,13 @@ export default function App () {
     <AuthProvider>
       <div className="fixed flex flex-col w-full h-full">
         <Nav display={!splashRoute}>
-          <PrivateRoute exact path="/" component={Splash}/>
-          <Route exact path="/feed" component={Feed}/>
+          <Route exact path="/" component={Splash}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
-          <Route path="/user" component={User}/>
-          <Route exact path="/map" component={MapView}/>
-          <Route path='/camera' component={Camera}/>
+          <PrivateRoute exact path="/feed" component={Feed}/>
+          <PrivateRoute exact path="/user" component={User}/>
+          <PrivateRoute exact path="/map" component={MapView}/>
+          <PrivateRoute exact path='/camera' component={Camera}/>
         </Nav>
       </div>
     </AuthProvider>
