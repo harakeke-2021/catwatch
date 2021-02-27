@@ -1,5 +1,6 @@
-import React from 'react'
-import { useHistory } from 'react-router'
+import React, { useContext } from 'react'
+import { Redirect, useHistory } from 'react-router'
+import { AuthContext } from '../auth/GetAuthState'
 
 export default function Splash () {
   const history = useHistory()
@@ -7,6 +8,12 @@ export default function Splash () {
   function navTo (e, route) {
     e.preventDefault()
     history.push(route)
+  }
+
+  const { currentUser } = useContext(AuthContext)
+
+  if (currentUser) {
+    return <Redirect to="/feed" />
   }
 
   return (
