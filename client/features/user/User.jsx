@@ -16,9 +16,16 @@ function User () {
           <img src="https://freepngimg.com/thumb/cartoon/86245-purple-cat-art-sans-undertale-png-image-high-quality.png" alt="" className="w-32 rounded-full"/>
           <h1 className="text-xl font-semibold text-gray-800">Mariano</h1>
           <h1 className="p-4 text-sm text-gray-400">Buenos Aires, Argentina</h1>
-          <h1 className="p-4 text-sm text-center text-gray-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint perferendis sit eum voluptatem at cum debitis illo impedit maiores explicabo fugit tempora, dolor, praesentium eos similique, placeat facere vel dolorum.</h1>
+          <h1 className="p-4 text-sm text-center text-gray-400"></h1>
+          <div className="flex flex-wrap justify-center w-screen mt-2 bg-gray-300 border-black rounded-md">
+
+            <div className="m-10 bg-white rounded-md"><img src="https://freepngimg.com/thumb/cartoon/86245-purple-cat-art-sans-undertale-png-image-high-quality.png" alt="" className="w-32 rounded-full"/></div>
+            <div className="m-10 bg-white rounded-md"><img src="https://freepngimg.com/thumb/cartoon/86245-purple-cat-art-sans-undertale-png-image-high-quality.png" alt="" className="w-32 rounded-full"/></div>
+            <div className="m-10 bg-white rounded-md"><img src="https://freepngimg.com/thumb/cartoon/86245-purple-cat-art-sans-undertale-png-image-high-quality.png" alt="" className="w-32 rounded-full"/></div>
+            
+          </div>
         </div>
-        <div></div>
+        <Logout/>
       </div>
     </div>
   )

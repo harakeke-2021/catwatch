@@ -11,4 +11,26 @@
     width: 100vw;
     height: 100vh;
   }
+  .images-profile {
+      border: solid ;
+      margin: 10px;
+      border-radius: 10px ;
+      width: 30%;
+      background: black;
+      height: 250px;
+  }
+
+  .dashboard-profile {
+  width: 1480px;
+  border-radius: 10px;
+  border-color: black solid;
+  background: grey;
+  color: white;
+  margin: 0 auto;
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 30%;
+  justify-content: center;
+  }
 }
