@@ -15,6 +15,7 @@ function User () {
 
   const [userDetails, setUserDetails] = useState({})
   const [userSightings, setUserSightings] = useState([])
+  const [fileUrl, setFileUrl] = useState(null)
 
   const { currentUser } = useContext(AuthContext)
   if (!currentUser) {
@@ -31,9 +32,27 @@ function User () {
 
   const fetchUserSightings = async () => {
     const sightingsRef = app.firestore().collection('sightings').where('userID', '==', `${currentUser.uid}`)
-    const sighting = await sightingsRef.get()
-    const list = sighting.docs.map(item => item.data())
-    setUserSightings(list)
+    const sightings = await sightingsRef.get()
+    // const list = sighting.docs.map(item => item.data())
+    setUserSightings(sightings.docs.map(doc => {
+      return doc.data()
+    }))
+    // setUserSightings(list)
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+  }
+
+  const onFileChange = async (e) => {
+    const file = e.target.files[0]
+    console.log(file)
+    const storageRef = app.storage().ref()
+    console.log(storageRef)
+    const fileRef = storageRef.child(file.name)
+    console.log(fileRef)
+    await fileRef.put(file)
+    // setFileUrl(await fileRef.getDownloadURL())
   }
 
   // location.x_ = latitude
@@ -44,13 +63,17 @@ function User () {
       <p>this is the users page for: {userDetails.email}</p>
       {userSightings.map((result, index) => (
         <div key={index}>
-          <img src={result.photoUrl} alt="catpic"/>
-          {result.location.x_}
+          {/* <img src={result.photoUrl} alt="catpic"/> */}
+          Location: {result.location.x_}
           <br></br>
-          {result.location.N_}
+          Location: {result.location.N_}
         </div>
       ))}
       <Logout/>
+      <form onSubmit={onSubmit} >
+        <input type="file" onChange={onFileChange}/>
+        <button>Submit</button>
+      </form>
     </>
   )
 }
