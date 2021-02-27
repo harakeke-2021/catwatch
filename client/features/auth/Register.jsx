@@ -33,7 +33,7 @@ function Register ({ history }) {
   return (
 
     <div>
-      <div className="shadow-2xl">
+      <div className=" w-full shadow-2xl">
         <div className="w-full h-full max-h-full px-10 py-32 text-xl bg-indigo-500">
           <form className="mx-auto" onSubmit={handleRegister}>
             <div className="flex items-center  bg-indigo-300 border-b border-indigo-500 rounded-t-lg">
@@ -53,3 +53,5 @@ function Register ({ history }) {
 }
 
 export default Register
+
+
