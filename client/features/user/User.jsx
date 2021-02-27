@@ -30,12 +30,9 @@ function User () {
   }
 
   const fetchUserSightings = async () => {
-    const list = []
     const sightingsRef = app.firestore().collection('sightings').where('userID', '==', `${currentUser.uid}`)
     const sighting = await sightingsRef.get()
-    sighting.docs.forEach(item => {
-      list.push(item.data())
-    })
+    const list = sighting.docs.map(item => item.data())
     setUserSightings(list)
   }
 
