@@ -16,11 +16,16 @@ import './style.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 
 export default function App () {
-  const splashRoute = useRouteMatch({ path: '/', exact: true })
+  // const noNavRoutes = useRouteMatch({ path: '/', exact: true })
+  const noNavRoutes = ['/', '/login', '/register']
+    .map(path => ({ path, exact: true }))
+    .map(useRouteMatch)
+    .reduce((prev, next) => prev || next)
+
   return (<>
     <AuthProvider>
       <div className="fixed flex flex-col w-full h-full">
-        <Nav display={!splashRoute}>
+        <Nav display={!noNavRoutes}>
           <Route exact path="/" component={Splash}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
