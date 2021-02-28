@@ -2,6 +2,7 @@
   "name": "catwatch",
   "version": "0.0.1",
   "description": "catwatch!",
+  "outputFormat": "commonjs",
   "scripts": {
     "dev": "parcel serve --https ./client/index.html",
     "test": "jest",

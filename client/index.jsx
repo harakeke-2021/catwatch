@@ -15,8 +15,7 @@ if (module.hot) {
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    const sw = './sw.js'
-    navigator.serviceWorker.register(sw)
+    navigator.serviceWorker.register(new URL('./sw.js', import.meta.url))
   })
 }
 
