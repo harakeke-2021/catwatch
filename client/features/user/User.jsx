@@ -55,14 +55,12 @@ function User () {
     setFileUrl(await fileRef.getDownloadURL())
   }
 
-  console.log(fileUrl)
-  console.log(currentUser.uid)
-
   // location.x_ = latitude
   // location.N_ = longitude
 
   return (
     <>
+      <img src={userDetails.profileURL} alt="" style={{ width: '20px' }}/>
       <p>this is the users page for: {userDetails.email}</p>
       {userSightings.map((result, index) => (
         <div key={index}>
