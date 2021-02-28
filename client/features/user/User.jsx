@@ -65,9 +65,7 @@ function User () {
       {userSightings.map((result, index) => (
         <div key={index}>
           {/* <img src={result.photoUrl} alt="catpic"/> */}
-          Location: {result.location.x_}
           <br></br>
-          Location: {result.location.N_}
         </div>
       ))}
       <Logout/>
