@@ -1,16 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { Redirect } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { setImg } from './camProtoSlice'
-import firebase from '../../firebase'
+import { setImg, setFile } from './camProtoSlice'
+import app from '../../firebase'
+import { AuthContext } from '../auth/GetAuthState'
 
 function Caption () {
-  const { url, name, type } = useSelector(state => state.camera.img)
+  const { url, name, type, fileUrl } = useSelector(state => state.camera.img)
   const [caption, setCaption] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
-  const storageRef = firebase.storage().ref()
+
+  const { currentUser } = useContext(AuthContext)
+  if (!currentUser) {
+    return <Redirect to="/login" />
+  }
 
   function onChange (e) {
     const { value } = e.target
@@ -22,31 +28,23 @@ function Caption () {
     history.push('/')
   }
 
-  async function submitForm (e) {
+  // submit to fireStore with random sighting ID
+  const submitForm = async (e) => {
     e.preventDefault()
-    console.log('img URL:', url)
-    console.log('img type:', type)
-    console.log('caption:', caption)
-    const imgRef = storageRef.child(`${name}`)
-    // todo: refactor - might need some actions/reducers for this
-    imgRef.put(url, { contentType: type })
-      .then(snapshot => {
-        console.log('snapshop:', snapshot)
-        console.log('uploaded img!')
-        dispatch(setImg({}))
-        return null
-      })
-      .catch(err => {
-        console.log('something went wrong!')
-        console.error(err)
-      })
+    await app.firestore().collection('sightings').doc('TEST').set({
+      test: 'test',
+      userID: currentUser.uid,
+      dateTime: Date.now(),
+      comments: caption,
+      photoUrl: fileUrl
+    })
     resetForm()
   }
 
   return (
     <form onSubmit={submitForm}>
       <div>
-        <button onClick={resetForm}>Back</button>
+        {/* <button onClick={resetForm}>Back</button> */}
       </div>
       <img src={url}/>
       <div>

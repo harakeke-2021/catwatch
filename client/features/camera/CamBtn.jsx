@@ -3,19 +3,23 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { setImg } from './camProtoSlice'
+import app from '../../firebase'
 
 function CamBtn () {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  function addImg (e) {
-    const img = e.target.files[0]
-    console.log(img.name)
-    console.log(img.type)
-    const url = URL.createObjectURL(img)
-    const { name, type } = img
-    dispatch(setImg({ url, name, type }))
-    history.push('/camera/caption')
+  // saving the image to the cloud but also passing along the blob data for the preview in caption. Ideally I'd want to pass the whole file via redux and submit the caption and the image in Caption.jsx instead but unsure how atm.
+  const addImg = async (e) => {
+    const file = e.target.files[0]
+    const storageRef = app.storage().ref()
+    const fileRef = storageRef.child(file.name)
+    await fileRef.put(file)
+    const fileUrl = await fileRef.getDownloadURL()
+    const url = URL.createObjectURL(file)
+    const { name, type } = file
+    dispatch(setImg({ url, name, type, fileUrl }))
+    await history.push('/camera/caption')
   }
 
   return (
