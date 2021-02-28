@@ -3,7 +3,7 @@ import { Redirect } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { setImg, setFile } from './camProtoSlice'
+import { setImg } from './camProtoSlice'
 import app from '../../firebase'
 import { AuthContext } from '../auth/GetAuthState'
 
@@ -31,7 +31,7 @@ function Caption () {
   // submit to fireStore with random sighting ID
   const submitForm = async (e) => {
     e.preventDefault()
-    await app.firestore().collection('sightings').doc('TEST').set({
+    await app.firestore().collection('sightings').doc().set({
       test: 'test',
       userID: currentUser.uid,
       dateTime: Date.now(),
@@ -44,7 +44,7 @@ function Caption () {
   return (
     <form onSubmit={submitForm}>
       <div>
-        {/* <button onClick={resetForm}>Back</button> */}
+        <button onClick={resetForm}>Back</button>
       </div>
       <img src={url}/>
       <div>
