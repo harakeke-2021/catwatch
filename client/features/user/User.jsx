@@ -58,6 +58,7 @@ function User () {
               </div>
             </div>
             {/* <Logout/>  will add logout button on hamburguer icon bg-gradient-to-bl from-indigo-200 to-pink-300 */}
+            <Logout/>
           </div>
         </div>
       </div>
