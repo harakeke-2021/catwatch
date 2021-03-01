@@ -21,6 +21,9 @@ function Camera () {
   function submitForm () {
     console.log(URL.createObjectURL(img))
     console.log(caption)
+    // upload image to firebase storage
+    // then, put data in firestore and:
+    resetForm()
   }
 
   return (
