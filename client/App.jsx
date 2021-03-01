@@ -9,7 +9,6 @@ import Login from './features/auth/Login'
 import { AuthProvider } from './features/auth/GetAuthState'
 import PrivateRoute from './features/auth/PrivateRoute'
 import User from './features/user/User'
-import MapView from './features/map/MapView'
 import Splash from './features/splash/Splash'
 import Map from './features/map/Map'
 
