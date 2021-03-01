@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { AuthContext } from '../auth/GetAuthState'
 
@@ -9,6 +10,7 @@ function Camera () {
   const [caption, setCaption] = useState('')
   const [location, setLocation] = useState({ longitude: 0, latitude: 0 })
 
+  const dispatch = useDispatch()
   const history = useHistory()
 
   const { currentUser } = useContext(AuthContext)
@@ -39,11 +41,11 @@ function Camera () {
   function submitForm (e) {
     e.preventDefault()
 
-    console.log(URL.createObjectURL(img))
-    console.log(caption)
-    console.log(location)
+    // console.log(URL.createObjectURL(img))
+    // console.log(caption)
+    // console.log(location)
 
-    postImageToStorage(img)
+    postImageToStorage(dispatch, img)
       .then(url => {
         resetForm()
         history.push('/')
