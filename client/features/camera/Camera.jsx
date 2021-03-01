@@ -1,8 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { AuthContext } from '../auth/GetAuthState'
+
+import { postImageToStorage, updateFirestore } from './cameraHelper'
 
 function Camera () {
   const [img, setImg] = useState(null)
   const [caption, setCaption] = useState('')
+
+  const history = useHistory()
+
+  const { currentUser } = useContext(AuthContext)
 
   function addImg (e) {
     setImg(e.target.files[0])
@@ -18,12 +26,20 @@ function Camera () {
     setCaption('')
   }
 
-  function submitForm () {
+  function submitForm (e) {
+    e.preventDefault()
+
     console.log(URL.createObjectURL(img))
     console.log(caption)
-    // upload image to firebase storage
-    // then, put data in firestore and:
-    resetForm()
+
+    postImageToStorage(img)
+      .then(url => {
+        resetForm()
+        history.push('/')
+        updateFirestore(currentUser, caption, url)
+        return null
+      })
+      .catch(err => console.error(err))
   }
 
   return (
