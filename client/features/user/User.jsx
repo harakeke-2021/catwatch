@@ -15,6 +15,7 @@ function User () {
 
   const [userDetails, setUserDetails] = useState({})
   const [userSightings, setUserSightings] = useState([])
+  const [fileUrl, setFileUrl] = useState('')
 
   const { currentUser } = useContext(AuthContext)
   if (!currentUser) {
@@ -31,9 +32,27 @@ function User () {
 
   const fetchUserSightings = async () => {
     const sightingsRef = app.firestore().collection('sightings').where('userID', '==', `${currentUser.uid}`)
-    const sighting = await sightingsRef.get()
-    const list = sighting.docs.map(item => item.data())
-    setUserSightings(list)
+    const sightings = await sightingsRef.get()
+    setUserSightings(sightings.docs.map(doc => {
+      return doc.data()
+    }))
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    const userPictureRef = app.firestore().collection('users').doc(`${currentUser.uid}`)
+    await userPictureRef.update({
+      profileURL: fileUrl
+    })
+    console.log('Photo submitted to firestore')
+  }
+
+  const onFileChange = async (e) => {
+    const file = e.target.files[0]
+    const storageRef = app.storage().ref()
+    const fileRef = storageRef.child(file.name)
+    await fileRef.put(file)
+    setFileUrl(await fileRef.getDownloadURL())
   }
 
   // location.x_ = latitude

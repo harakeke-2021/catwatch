@@ -3,6 +3,8 @@ import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import app from '../../firebase'
 import { AuthContext } from './GetAuthState'
+import cat from 'url:../../static/cat.jpeg'
+
 
 function Register ({ history }) {
   const handleRegister = useCallback(
@@ -14,7 +16,8 @@ function Register ({ history }) {
 
         await app.firestore().collection('users').doc(userAuth.user.uid).set({
           email: email.value,
-          id: userAuth.user.uid
+          id: userAuth.user.uid,
+          profileURL: cat
         })
         history.push('/')
       } catch (error) {
