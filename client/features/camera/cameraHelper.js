@@ -5,6 +5,7 @@ import firebase from '../../firebase'
 const storage = firebase.storage()
 const firestore = firebase.firestore()
 
+// add state indicators for upload status?
 export function postImageToStorage (image) {
   const { name, type } = image
   const fileRef = storage.ref().child(sha1(name + Date.now()))
@@ -20,11 +21,12 @@ function getStorageImageURL (fileRef) {
     .catch(err => console.error(err))
 }
 
-export function updateFirestore (currentUser, comments, photoUrl) {
+export function updateFirestore (currentUser, location, comments, photoUrl) {
   return firestore.collection('sightings').doc().set({
     test: 'test',
     userID: currentUser.uid,
     dateTime: Date.now(),
+    location,
     comments,
     photoUrl
   })

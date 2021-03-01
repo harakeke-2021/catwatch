@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { AuthContext } from '../auth/GetAuthState'
 
@@ -7,10 +7,20 @@ import { postImageToStorage, updateFirestore } from './cameraHelper'
 function Camera () {
   const [img, setImg] = useState(null)
   const [caption, setCaption] = useState('')
+  const [location, setLocation] = useState({ longitude: 0, latitude: 0 })
 
   const history = useHistory()
 
   const { currentUser } = useContext(AuthContext)
+
+  // todo: this should be global state -> prompted after opening app
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { longitude, latitude } }) => setLocation({ longitude, latitude }),
+      (err) => console.error(err),
+      { enableHighAccuracy: true }
+    )
+  }, [])
 
   function addImg (e) {
     setImg(e.target.files[0])
@@ -31,12 +41,13 @@ function Camera () {
 
     console.log(URL.createObjectURL(img))
     console.log(caption)
+    console.log(location)
 
     postImageToStorage(img)
       .then(url => {
         resetForm()
         history.push('/')
-        updateFirestore(currentUser, caption, url)
+        updateFirestore(currentUser, location, caption, url)
         return null
       })
       .catch(err => console.error(err))
