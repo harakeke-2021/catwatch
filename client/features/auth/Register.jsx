@@ -3,13 +3,13 @@ import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import app from '../../firebase'
 import { AuthContext } from './GetAuthState'
+import cat from 'url:../../static/defaultUserCat.jpg'
 
 function Register ({ history }) {
   const handleRegister = useCallback(
     async event => {
       event.preventDefault()
       const { email, password, username } = event.target.elements
-      const defaultPicture = 'https://firebasestorage.googleapis.com/v0/b/test-eb3da.appspot.com/o/defaultUserCat.jpg?alt=media&token=af31b243-74c9-4fe1-9f09-93e94fe27e60'
       try {
         const userAuth = await app.auth().createUserWithEmailAndPassword(email.value, password.value)
 
@@ -17,7 +17,7 @@ function Register ({ history }) {
           username: username.value,
           email: email.value,
           id: userAuth.user.uid,
-          userPicture: defaultPicture
+          userPicture: cat
         })
         history.push('/')
       } catch (error) {
