@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import feedSlice from './features/feed/feedSlice'
 import cameraSlice from './features/camera/camProtoSlice'
+import postsSlice from './features/feed/postsSlice'
 
 const store = configureStore({
   reducer: {
-    feed: feedSlice,
+    posts: postsSlice,
     camera: cameraSlice
   }
 })

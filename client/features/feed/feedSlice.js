@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, createEntityAdapter } from '@reduxjs/toolkit'
+import app from '../../firebase'
 
 export const adjustLater = createAsyncThunk('feed/adjustLater', async (amount) => {
   return Promise((resolve, reject) => {
@@ -8,25 +9,21 @@ export const adjustLater = createAsyncThunk('feed/adjustLater', async (amount) =
   })
 })
 
+const postsAdapter = createEntityAdapter()
+
+const initialState = postsAdapter.getInitialState({
+  loading: false
+})
+
+export const fetchPosts = createAsyncThunk('feed/fetchPosts', async () => {
+  const sightings = await app.firestore().collection('sightings')
+})
+
 const feedSlice = createSlice({
   name: 'feed',
-  initialState: {
-    value: 0,
-    status: 'idle'
-  },
+  initialState,
   reducers: {
-    increment: state => {
-      state.value += 1
-    },
-    decrement: state => {
-      state.value -= 1
-    },
-    adjust: (state, action) => {
-      state.value += action.payload
-    },
-    set: (state, action) => {
-      state.value = action.payload
-    }
+    postDeleted: postsAdapter.removeOne,
   },
   extraReducers: builder => {
     builder
@@ -35,6 +32,13 @@ const feedSlice = createSlice({
       })
       .addCase(adjustLater.fulfilled, (state, action) => {
         state.value = action.payload
+      })
+      .addCase(fetchPosts.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.loading = false
+        postsAdapter.setAll(state, action.payload)
       })
   }
 })
