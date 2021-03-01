@@ -11,6 +11,7 @@ import PrivateRoute from './features/auth/PrivateRoute'
 import User from './features/user/User'
 import MapView from './features/map/MapView'
 import Splash from './features/splash/Splash'
+import Map from './features/map/Map'
 
 import './style.css'
 import '@fortawesome/fontawesome-free/css/all.css'
@@ -31,7 +32,7 @@ export default function App () {
           <Route exact path="/register" component={Register}/>
           <PrivateRoute exact path="/feed" component={Feed}/>
           <PrivateRoute exact path="/user" component={User}/>
-          <PrivateRoute exact path="/map" component={MapView}/>
+          <PrivateRoute exact path="/map" component={Map}/>
           <PrivateRoute exact path='/camera' component={Camera}/>
         </Nav>
       </div>
