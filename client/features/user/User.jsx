@@ -63,8 +63,7 @@ function User () {
       <div className="items-center justify-center flex-1 h-full overflow-y-auto divide-y divide-gray-100">
         <div className="flex rounded-lg">
           <div className="flex flex-col items-center w-full h-screen bg-transparent mb-7">
-            <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-cat-wearing-sunglasses-while-sitting-royalty-free-image-1571755145.jpg?crop=0.670xw:1.00xh;0.147xw,0&resize=980:*"
-              alt="" className="w-32 h-32 mt-5 border-2 border-gray-400 rounded-full"/>
+            <img src={userDetails.userPicture} alt="" className="w-32 h-32 mt-5 border-2 border-gray-400 rounded-full"/>
             <h1 className="h-screen pt-5 text-xl font-semibold text-gradient bg-gradient-to-r from-indigo-500 to-pink-400 rounded-md" >{userDetails.email} <i className="fas fa-pen"></i></h1>
             <h1 className="p-4 text-sm text-gradient bg-gradient-to-r from-indigo-500 to-pink-300">Auckland, New Zealand</h1>
             <div className="w-11/12 h-full mt-2 overflow-y-visible bg-gradient-to-bl from-indigo-200 to-pink-300 rounded-md">
