@@ -57,6 +57,7 @@
     "@fortawesome/fontawesome-free": "^5.15.2",
     "dotenv": "^8.2.0",
     "firebase": "^8.2.9",
+    "image-file-resize": "^1.0.3",
     "leaflet": "^1.7.1",
     "parcel": "^2.0.0-nightly.609",
     "react-leaflet": "^3.1.0"

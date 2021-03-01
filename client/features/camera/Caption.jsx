@@ -50,7 +50,8 @@ function Caption () {
       <div>
         <button onClick={resetForm}>Back</button>
       </div>
-      <img src={url} style={{ width: '75%', height: '75%' }} />
+      <img src={url} />
+      {/* style={{ width: '75%', height: '75%' }} */}
       <div>
         <textarea name='caption' placeholder='caption' value={caption} style={{
           boxSizing: 'border-box',
