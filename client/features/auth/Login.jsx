@@ -28,22 +28,26 @@ function Login ({ history }) {
   }
 
   return (
-    <div>
-      <h1>Log in</h1>
-      <form onSubmit={handleLogin}>
-        <label>
-          Email
-          <input name="email" type="email" placeholder="Email" autoComplete="on" />
-        </label>
-        <label>
-          Password
-          <input name="password" type="password" placeholder="Password" autoComplete="on"/>
-        </label>
-        <button type="submit">Log in</button>
-      </form>
-      <Link to="/register"><p>No Account? Register here</p></Link>
+    <div className="h-full">
+      <div className="h-full shadow-2xl">
+        <div className="flex flex-col w-screen h-full px-10 py-32 text-xl bg-indigo-500">
+          <form className="items-center w-full mx-auto my-auto" onSubmit={handleLogin}>
+            <div className="flex items-center bg-indigo-300 border-b border-indigo-500 rounded-t-lg">
+              <label htmlFor="email" className="w-20 ml-2 mr-8 text-pink-100">Email</label>
+              <input id="email" name="email" type="email" placeholder="Email" autoComplete="on" className="flex-1 p-4 pl-0 text-white placeholder-purple-200 bg-transparent outline-none"/>
+            </div >
+            <div className="flex items-center mb-10  bg-indigo-300 rounded-b-lg">
+              <label htmlFor="password" className="w-20 ml-2 mr-8 text-pink-100">Password</label>
+              <input id="password" name="password" type="password" placeholder="Password" autoComplete="on" className="flex-1 p-4 pl-0 text-white placeholder-purple-200 bg-transparent outline-none"/></div>
+            <button type="submit" className="block w-full py-3 font-bold text-white bg-pink-400 rounded shadow-2xl">Log In</button>
+            <p className="flex-1 p-4 pl-0 text-xs text-pink-100">No account? Register <Link to="/register" className='text-pink-400 underline'>here</Link></p>
+          </form>
+        </div>
+      </div>
     </div>
+
   )
 }
+// text-gradient bg-gradient-to-r from-pink-400 to-indigo-500
 
 export default Login
