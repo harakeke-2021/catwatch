@@ -8,7 +8,7 @@ import app from '../../firebase'
 import { AuthContext } from '../auth/GetAuthState'
 
 function Caption () {
-  const { url, name, type, fileUrl } = useSelector(state => state.camera.img)
+  const { url, name, type, blob } = useSelector(state => state.camera.img)
   const [caption, setCaption] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
@@ -28,9 +28,13 @@ function Caption () {
     history.push('/')
   }
 
-  // submit to fireStore with random sighting ID
+  // submit to storage and then firestore
   const submitForm = async (e) => {
     e.preventDefault()
+    const storageRef = app.storage().ref()
+    const fileRef = storageRef.child(name)
+    await fileRef.put(blob)
+    const fileUrl = await fileRef.getDownloadURL()
     await app.firestore().collection('sightings').doc().set({
       test: 'test',
       userID: currentUser.uid,
@@ -46,7 +50,7 @@ function Caption () {
       <div>
         <button onClick={resetForm}>Back</button>
       </div>
-      <img src={url}/>
+      <img src={url} style={{ width: '75%', height: '75%' }} />
       <div>
         <textarea name='caption' placeholder='caption' value={caption} style={{
           boxSizing: 'border-box',
