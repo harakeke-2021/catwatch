@@ -3,16 +3,17 @@ import { createSlice } from '@reduxjs/toolkit'
 const cameraSlice = createSlice({
   name: 'camera',
   initialState: {
-    img: ''
+    uploading: false
   },
   reducers: {
-    setImg: (state, action) => {
-      state.img = action.payload
+    // todo: should this be global state? state for a wait indicator?
+    setUploading: (state, action) => {
+      state.uploading = action.payload
     }
   }
 })
 
 export default cameraSlice.reducer
 export const {
-  setImg
+  setUploading
 } = cameraSlice.actions

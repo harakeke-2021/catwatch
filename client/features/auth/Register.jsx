@@ -5,6 +5,7 @@ import app from '../../firebase'
 import { AuthContext } from './GetAuthState'
 import cat from 'url:../../static/defaultUserCat.jpg'
 
+
 function Register ({ history }) {
   const handleRegister = useCallback(
     async event => {
