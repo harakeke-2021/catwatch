@@ -53,7 +53,7 @@ function Camera () {
 
   return (
     <form onSubmit={submitForm}>
-      <button onClick={resetForm}>Back</button>
+      <button type='reset' onClick={resetForm}>Back</button>
       {
         img
           ? (<>
