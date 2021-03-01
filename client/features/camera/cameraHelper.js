@@ -12,7 +12,6 @@ export function postImageToStorage (dispatch, image) {
 
   dispatch(setUploading(true))
   return fileRef.put(image, { contentType: type })
-    // .then(snapshot => console.log('uploaded image file!'))
     .then(() => {
       dispatch(setUploading(false))
       return getStorageImageURL(fileRef)
@@ -34,6 +33,5 @@ export function updateFirestore (currentUser, location, comments, photoUrl) {
     comments,
     photoUrl
   })
-    // .then(() => console.log('sightings updated!'))
     .catch(err => console.error(err))
 }

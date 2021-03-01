@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { AuthContext } from '../auth/GetAuthState'
 
+import { AuthContext } from '../auth/GetAuthState'
 import { postImageToStorage, updateFirestore } from './cameraHelper'
 
 function Camera () {
@@ -40,10 +40,6 @@ function Camera () {
 
   function submitForm (e) {
     e.preventDefault()
-
-    // console.log(URL.createObjectURL(img))
-    // console.log(caption)
-    // console.log(location)
 
     postImageToStorage(dispatch, img)
       .then(url => {
