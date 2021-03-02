@@ -52,7 +52,7 @@ function Camera () {
   }
 
   return (
-    <div className="items-center justify-center flex-1 h-full overflow-y-hidden divide-y divide-gray-100">
+    <div className="items-center overflow-y-visible justify-center flex-1 h-full overflow-y-hidden divide-y divide-gray-100">
       <div className=" flex flex-col items-center w-full h-full mb-2 bg-transparent">
         <div className="w-11/12 h-screen mt-2 mb-2 overflow-y-visible bg-indigo-500 rounded-md">
           <div className="flex flex-wrap  w-full">
