@@ -12,7 +12,7 @@ export default function Feed () {
   }, [])
 
   useEffect(() => {
-    setRenderUntil(1)
+    setRenderUntil(3)
   }, [postsIds])
 
   function nextPlease () {
