@@ -28,11 +28,10 @@ export default function Map () {
     }).addTo(map)
     const points = addressPoints
       ? addressPoints.map((p) => {
-        return [p[0], p[1]]
+        return [p[0], p[1], '3.0']
       })
       : []
-
-    L.heatLayer(points).addTo(map)
+    L.heatLayer(points, { radius: 30, gradient: { 0.0: '#FBCFE8', 0.3: '#EC4899', 1.0: '#818CF8' }, blur: 30 }).addTo(map)
   }, [])
 
   return (
