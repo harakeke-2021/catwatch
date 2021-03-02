@@ -9,7 +9,7 @@ import { postImageToStorage, updateFirestore } from './cameraHelper'
 function Camera () {
   const [img, setImg] = useState(null)
   const [caption, setCaption] = useState('')
-  const location = useSelector(state => state.geoloc.obj)
+  const location = useSelector(state => state.geoloc.location)
 
   const dispatch = useDispatch()
   const history = useHistory()

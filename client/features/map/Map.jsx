@@ -1,42 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import 'leaflet/dist/leaflet.css'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import L from 'leaflet'
 import 'leaflet.heat'
+import 'leaflet/dist/leaflet.css'
+
 import { addressPoints } from '../../static/addressPoints'
+import { updateLocation } from './geolocHelper'
+
 export default function Map () {
-  const [state, setState] = useState({
-    longitude: '',
-    latitude: ''
-  })
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        setState({
-          longitude: position.coords.longitude,
-          latitude: position.coords.latitude
-        })
-      }, function (error) { console.log(error) },
+    const map = L.map('map', { doubleClickZoom: false })
+    const points = addressPoints || []
 
-      {
-        enableHighAccuracy: true
-      }
-    )
-    var map = L.map('map', { doubleClickZoom: false }).locate({ setView: true, maxZoom: 16 })
+    map.locate({ setView: true, maxZoom: 16 })
+    map.once('locationfound', (evt) => updateLocation(dispatch, evt))
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map)
-    const points = addressPoints
-      ? addressPoints.map((p) => {
-        return [p[0], p[1]]
-      })
-      : []
-
     L.heatLayer(points).addTo(map)
   }, [])
 
   return (
     <div id="map" style={{ height: '100vh' }}></div>
-
   )
 }

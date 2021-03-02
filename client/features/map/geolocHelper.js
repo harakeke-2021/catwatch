@@ -9,3 +9,7 @@ export function promptForGeoLoc (dispatch) {
     { enableHighAccuracy: true }
   )
 }
+
+export function updateLocation (dispatch, { latitude, longitude }) {
+  dispatch(setLocation({ latitude, longitude }))
+}
