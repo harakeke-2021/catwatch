@@ -18,7 +18,7 @@ function Camera () {
 
   useEffect(() => {
     promptForGeoLoc(dispatch)
-  }, [!location])
+  }, [])
 
   function addImg (e) {
     setImg(e.target.files[0])
