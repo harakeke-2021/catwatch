@@ -20,7 +20,7 @@ export default function Map () {
   useEffect(() => {
     const map = L.map('map', { doubleClickZoom: false })
     const points = getMapPoints(posts)
-    const heatlayer = L.heatLayer(points)
+    const heatlayer = L.heatLayer(points, { radius: 30, gradient: { 0.0: '#FBCFE8', 0.3: '#EC4899', 1.0: '#818CF8' }, blur: 30 })
 
     map.locate({ setView: true, maxZoom: 16 })
     map.once('locationfound', (evt) => updateLocation(dispatch, evt))
