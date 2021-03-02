@@ -22,3 +22,11 @@ export function getAllSightingLocations () {
     .then(snapshot => snapshot.docs.map(doc => doc.data()))
     .then(data => data.filter(datum => !!datum.location))
 }
+
+export function getMapPoints (posts) {
+  return posts.filter(post => !!post.location)
+    .map(post => {
+      const { latitude, longitude } = post.location
+      return [latitude, longitude]
+    })
+}
