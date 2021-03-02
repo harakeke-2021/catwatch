@@ -5,10 +5,14 @@ import 'leaflet.heat'
 import 'leaflet/dist/leaflet.css'
 
 import { addressPoints } from '../../static/addressPoints'
-import { updateLocation } from './geolocHelper'
+import { getAllSightingLocations, updateLocation } from './geolocHelper'
 
 export default function Map () {
   const dispatch = useDispatch()
+
+  getAllSightingLocations()
+    .then(data => console.log(data))
+    .catch(err => console.error(err))
 
   useEffect(() => {
     const map = L.map('map', { doubleClickZoom: false })
