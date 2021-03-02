@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import feedSlice from './features/feed/feedSlice'
 import cameraSlice from './features/camera/camProtoSlice'
+import postsSlice from './features/feed/postsSlice'
+import usersSlice from './features/user/usersSlice'
 import geolocSlice from './features/map/geolocSlice'
 
 const store = configureStore({
   reducer: {
-    feed: feedSlice,
+    posts: postsSlice,
     camera: cameraSlice,
+    users: usersSlice,
     geoloc: geolocSlice
   }
 })

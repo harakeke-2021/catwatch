@@ -11,7 +11,7 @@ function Logout () {
 
   return (
     <div>
-      <button onClick={handleLogout} className="block w-full py-3 font-bold text-white bg-pink-400 rounded shadow-2xl">Logout</button>
+      <button onClick={handleLogout} className="block w-full py-3 mb-2 font-bold text-white bg-pink-400 rounded shadow-2xl">Logout</button>
     </div>
   )
 }

@@ -1,22 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 // eslint-disable-next-line import/no-unresolved
-import cat from 'url:../../static/cat.jpeg'
+import { selectUserById } from '../user/usersSlice'
+import { selectPostById } from './postsSlice'
 
-export default function FeedPost (props) {
-  return (
-    <section className="pb-12">
+export default function FeedPost ({ id, nextPlease }) {
+  const post = useSelector(state => selectPostById(state, id))
+  const user = useSelector(state => selectUserById(state, post.userID)) ||
+    { username: 'anonymous cat' }
+
+  const [visible, setVisible] = useState(false)
+
+  function imageLoaded () {
+    setVisible(true)
+    nextPlease()
+  }
+
+  return post ? (
+    <section className={`pb-12 transition-all duration-500 ease-in-out ${visible ? 'opacity-100' : 'opacity-0'}`}>
       <div className="flex items-center p-4">
         <div className="flex w-8 h-8 bg-green-500 rounded-full" >
           <p className="m-auto">😽</p>
         </div>
-        <div className="px-8">{props.item}</div>
+        <div className="px-8">{user.username}</div>
       </div>
       <div>
-        <img className="w-full" src={cat} alt=""/>
+        <img className="w-full" src={post.photoUrl} onLoad={imageLoaded} alt=""/>
       </div>
       <div className="h-8 p-2 bg-gray-300"></div>
-      <div className="h-24 p-2 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, vel magni. Non impedit id ducimus delectus a. Voluptatibus, qui temporibus!</div>
+      <div className="h-24 p-2 text-sm">{post.comments}</div>
     </section>
-  )
+  ) : <h1>loading</h1>
 }
