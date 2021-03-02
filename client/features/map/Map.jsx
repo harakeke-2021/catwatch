@@ -4,14 +4,17 @@ import L from 'leaflet'
 import 'leaflet.heat'
 import 'leaflet/dist/leaflet.css'
 
-// import { addressPoints } from '../../static/addressPoints'
-import { selectPosts } from '../feed/postsSlice'
+import { fetchPosts, selectPosts } from '../feed/postsSlice'
 import { updateLocation } from './geolocHelper'
 
 export default function Map () {
   const posts = useSelector(selectPosts)
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchPosts())
+  }, [!posts])
 
   useEffect(() => {
     const map = L.map('map', { doubleClickZoom: false })
