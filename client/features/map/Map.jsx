@@ -1,22 +1,25 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import L from 'leaflet'
 import 'leaflet.heat'
 import 'leaflet/dist/leaflet.css'
 
-import { addressPoints } from '../../static/addressPoints'
-import { getAllSightingLocations, updateLocation } from './geolocHelper'
+// import { addressPoints } from '../../static/addressPoints'
+import { selectPosts } from '../feed/postsSlice'
+import { updateLocation } from './geolocHelper'
 
 export default function Map () {
-  const dispatch = useDispatch()
+  const posts = useSelector(selectPosts)
 
-  getAllSightingLocations()
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const map = L.map('map', { doubleClickZoom: false })
-    const points = addressPoints || []
+    const points = posts.filter(post => !!post.location)
+      .map(post => {
+        const { latitude, longitude } = post.location
+        return [latitude, longitude]
+      })
 
     map.locate({ setView: true, maxZoom: 16 })
     map.once('locationfound', (evt) => updateLocation(dispatch, evt))
