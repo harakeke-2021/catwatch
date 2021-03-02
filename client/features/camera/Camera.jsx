@@ -52,18 +52,36 @@ function Camera () {
   }
 
   return (
-    <form onSubmit={submitForm}>
-      <button type='reset' onClick={resetForm}>Back</button>
-      {
-        img
-          ? (<>
-            <img src={URL.createObjectURL(img)}/>
-            <input type='text' placeholder='caption' value={caption} onChange={addCaption}/>
-            <button type='submit'>Submit</button>
-          </>)
-          : <input type='file' id='imageFile' capture='environment' accept='image/*' onChange={addImg}/>
-      }
-    </form>
+    <div className="items-center justify-center flex-1 h-full overflow-y-hidden divide-y divide-gray-100">
+      <div className=" flex flex-col items-center w-full h-full mb-2 bg-transparent">
+        <div className="w-11/12 h-screen mt-2 mb-2 overflow-y-visible bg-gradient-to-bl from-indigo-200 to-pink-300 rounded-md">
+          <div className="flex flex-wrap  w-full">
+            <form className="h-full" onSubmit={submitForm}>
+
+              <button type='reset' onClick={resetForm} className="w-20  mr-8 text-pink-100 bg-pink-600 rounded-sm">Back</button>
+              {<div className=""> {
+                img
+                  ? (<><div className="p-5 mt-2">
+                    <img className="object-contain border-2 border-gray-300" src={URL.createObjectURL(img)}/>
+                  </div>
+                  <textarea placeholder="enter a description..." className="w-11/12 bg-indigo-500 h-16 px-3 py-2 ml-5 text-base text-pink-200 placeholder-gray-600 border rounded-lg focus:shadow-outline"></textarea>
+                  <div className="flex flex-row m-5 ">
+
+                    {/* <input className="flex-1 pl-2 mr-2 "type='text' placeholder='Add caption' value={caption} onChange={addCaption}/> */}
+                    <button type='submit' className="w-20 mr-8 text-pink-100 bg-pink-600 rounded-sm flex-2">Submit</button>
+                  </div>
+                  </>)
+                  : <input type='file' id='imageFile' capture='environment' accept='image/*' onChange={addImg}/>
+              }
+              </div>
+              }
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
   )
 }
 
