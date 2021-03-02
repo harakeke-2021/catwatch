@@ -8,11 +8,13 @@ function User () {
   const [userDetails, setUserDetails] = useState({})
   const [userSightings, setUserSightings] = useState([])
   const [isEditing, setIsEditing] = useState(false)
-  const [newUsername, setNewUsername] = useState(userDetails.username)
+  const [isEditingPhoto, setIsEditingPhoto] = useState(false)
+  const [newUsername, setNewUsername] = useState(null)
+  const [img, setImg] = useState(null)
 
   useEffect(() => {
     fetchUserData()
-  }, [newUsername])
+  }, [newUsername, img])
 
   useEffect(() => {
     fetchUserSightings()
@@ -57,12 +59,28 @@ function User () {
     setNewUsername(e.target.value)
   }
 
-  function photoOnClick () {
-    console.log('Hellos')
+  function cancelUsernameState () {
+    setIsEditing(false)
+  }
+  function cancelPhotoState () {
+    setImg(null)
   }
 
-  function setState () {
-    setIsEditing(false)
+  function addImg (e) {
+    setImg(e.target.files[0])
+    setIsEditingPhoto(true)
+  }
+
+  const savePicture = async () => {
+    const storageRef = app.storage().ref()
+    const fileRef = storageRef.child('test')
+    await fileRef.put(img)
+    const fileUrl = await fileRef.getDownloadURL()
+    const userPhotoRef = app.firestore().collection('users').doc(`${currentUser.uid}`)
+    await userPhotoRef.update({
+      userPicture: fileUrl
+    })
+    setImg(null)
   }
 
   return (
@@ -70,16 +88,27 @@ function User () {
       <div className="items-center justify-center flex-1 h-full overflow-y-auto divide-y divide-gray-100">
         <div className="flex rounded-lg">
           <div className="flex flex-col items-center w-full h-screen bg-transparent mb-7">
-            <div onClick={photoOnClick}>
-              <img src={userDetails.userPicture} alt="" className="w-32 h-32 mt-5 border-2 border-gray-400 rounded-full" title="edit picture" />
-            </div>
+
+            {!img
+              ? <label htmlFor="image">
+                <img src={userDetails.userPicture} alt="" className="w-32 h-32 mt-5 border-2 border-gray-400 rounded-full" title="edit picture" />
+                <input type="file" name="image" id="image" className="invisible w-0 h-0" onChange={addImg}/>
+              </label>
+              : (
+                <>
+                  <img src={URL.createObjectURL(img)} alt="" className="w-32 h-32 mt-5 border-2 border-gray-400 rounded-full" title="edit picture" />
+                  <button className="w-24 py-3 mb-2 font-bold text-white bg-pink-400 rounded shadow-2xl" onClick={savePicture}>Save</button>
+                  <button type="reset" className="w-24 py-3 mb-2 font-bold text-white bg-pink-400 rounded shadow-2xl" onClick={cancelPhotoState}>Cancel</button>
+                </>
+              )}
+
             {!isEditing
               ? <h1 className="p-4 text-xl text-gradient bg-gradient-to-r from-indigo-500 to-pink-300">{userDetails.username} <i className="fas fa-pen" onClick={handleUsername}></i></h1>
               : (
                 <>
                   <input type="text" className="px-4 py-2 my-2 text-sm text-gray-700 border rounded-lg focus:outline-none" onChange={userOnChange}/>
                   <button className="w-24 py-3 mb-2 font-bold text-white bg-pink-400 rounded shadow-2xl" onClick={submitUsername}>Save</button>
-                  <button type="reset" className="w-24 py-3 mb-2 font-bold text-white bg-pink-400 rounded shadow-2xl" onClick={setState}>Cancel</button>
+                  <button type="reset" className="w-24 py-3 mb-2 font-bold text-white bg-pink-400 rounded shadow-2xl" onClick={cancelUsernameState}>Cancel</button>
                 </>
               )}
             <h1 className="pt-5 text-lg font-semibold text-gradient bg-gradient-to-r from-indigo-500 to-pink-400 rounded-md" >{userDetails.email}</h1>
