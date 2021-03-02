@@ -2,7 +2,10 @@ import { createAsyncThunk, createSlice, createEntityAdapter } from '@reduxjs/too
 import app from '../../firebase'
 import { fetchUsers } from '../user/usersSlice'
 
-const postsAdapter = createEntityAdapter()
+const postsAdapter = createEntityAdapter({
+  sortComparer: (a, b) => b.dateTime - a.dateTime
+}
+)
 
 const initialState = postsAdapter.getInitialState({
   loading: false
