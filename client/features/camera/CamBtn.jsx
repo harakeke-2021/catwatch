@@ -1,18 +1,23 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-
 import { setImg } from './camProtoSlice'
+import convert from 'image-file-resize'
 
 function CamBtn () {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  function addImg (e) {
-    const img = e.target.files[0]
-    const imgURL = URL.createObjectURL(img)
-    dispatch(setImg(imgURL))
-    history.push('/camera/caption')
+
+  // putting the blob in redux store (works but hmmmmmmm)
+  const addImg = async (e) => {
+    const file = await convert({ file: e.target.files[0], width: 300, height: 300 })
+    const url = URL.createObjectURL(file)
+    const blob = await fetch(url).then(r => r.blob())
+    const { name, type } = file
+    dispatch(setImg({ url, name, type, blob }))
+
+    await history.push('/camera/caption')
   }
 
   return (
