@@ -38,6 +38,7 @@ function User () {
     }))
   }
 
+  // eslint-disable-next-line no-unused-vars
   const onSubmit = async (e) => {
     e.preventDefault()
     const userPictureRef = app.firestore().collection('users').doc(`${currentUser.uid}`)
@@ -47,6 +48,7 @@ function User () {
     console.log('Photo submitted to firestore')
   }
 
+  // eslint-disable-next-line no-unused-vars
   const onFileChange = async (e) => {
     const file = e.target.files[0]
     const storageRef = app.storage().ref()
