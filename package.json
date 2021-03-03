@@ -60,6 +60,7 @@
     "firebase": "^8.2.9",
     "js-sha1": "^0.6.0",
     "leaflet": "^1.7.1",
+    "leaflet.heat": "^0.2.0",
     "parcel": "^2.0.0-nightly.609",
     "react-leaflet": "^3.1.0"
   }
