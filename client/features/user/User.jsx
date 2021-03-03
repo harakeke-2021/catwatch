@@ -86,7 +86,7 @@ function User () {
 
   return (
     <>
-      <div className="flex flex-col items-center w-full h-screen bg-transparent mb-7">
+      <div className="w-full h-screen bg-transparent flex-box-f mb-7">
         {!img
           ? <div><label htmlFor="image">
             <img src={userDetails.userPicture} alt="" className="w-32 h-32 mt-5 border-2 border-gray-400 rounded-full" title="edit picture" />
