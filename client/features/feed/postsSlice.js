@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 import app from '../../firebase'
 import { fetchUsers } from '../user/usersSlice'
+import firebase from 'firebase'
 
 const postsAdapter = createEntityAdapter({
   sortComparer: (a, b) => b.dateTime - a.dateTime
@@ -22,6 +23,23 @@ export const fetchPosts = createAsyncThunk('feed/fetchPosts', async (thought, { 
   return posts
 })
 
+export const likePost = createAsyncThunk('feed/likePost', async ({ postId, userId, like }) => {
+  const ref = app.firestore().collection('sightings').doc(postId)
+
+  if (like) {
+    await ref.update({
+      aplaws: firebase.firestore.FieldValue.arrayUnion(userId)
+    })
+  } else {
+    await ref.update({
+      aplaws: firebase.firestore.FieldValue.arrayRemove(userId)
+    })
+  }
+
+  const updatedDoc = await ref.get()
+  return { id: updatedDoc.id, ...updatedDoc.data() }
+})
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
@@ -36,6 +54,10 @@ const postsSlice = createSlice({
     },
     [fetchPosts.rejected]: (state, action) => {
       state.loading = false
+    },
+    [likePost.fulfilled]: postsAdapter.upsertOne,
+    [likePost.rejected]: (state, action) => {
+      console.error(action)
     }
   }
 })
