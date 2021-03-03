@@ -1,23 +1,27 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { AuthContext } from '../auth/GetAuthState'
-import { promptForGeoLoc } from '../map/geolocHelper'
 import { postImageToStorage, updateFirestore } from './cameraHelper'
 
 function Camera () {
   const [img, setImg] = useState(null)
   const [caption, setCaption] = useState('')
-  const location = useSelector(state => state.geoloc.location)
+  const [location, setLocation] = useState({ longitude: 0, latitude: 0 })
 
   const dispatch = useDispatch()
   const history = useHistory()
 
   const { currentUser } = useContext(AuthContext)
 
+  // todo: this should be global state -> prompted after opening app
   useEffect(() => {
-    promptForGeoLoc(dispatch)
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { longitude, latitude } }) => setLocation({ longitude, latitude }),
+      (err) => console.error(err),
+      { enableHighAccuracy: true }
+    )
   }, [])
 
   function addImg (e) {
@@ -51,15 +55,15 @@ function Camera () {
 
     <div className="items-center justify-center flex-1 h-full overflow-y-visible divide-y divide-gray-100">
       <div className="flex flex-col items-center w-full h-full mb-2 bg-transparent">
-        <div className="flex flex-wrap items-center w-screen h-screen overflow-y-visible bg-indigo-500">
+        <div className="flex flex-wrap items-center w-screen h-full overflow-y-visible bg-indigo-500">
           <div className="flex-wrap items-center flex-1 w-full">
             <form className="flex flex-col h-full" onSubmit={submitForm}>
               <div className="flex flex-row justify-center">
               </div>
-              {<div className="flex flex-col items-center"> {
+              {<div className="flex flex-col bg-indigo-500 items-center"> {
                 img
                   ? (<><div className="flex flex-col items-center pt-5 pb-5 pl-5 pr-5">
-                        <button type='reset' onClick={resetForm} className="w-20 leading-normal tracking-wider mb-5 text-white bg-pink-400 border-b-2 border-pink-300 rounded-sm">Back</button>
+                    <button type='reset' onClick={resetForm} className="w-20 mb-5 leading-normal tracking-wider text-white bg-pink-400 border-b-2 border-pink-300 rounded-sm">Back</button>
                     <img className="object-contain border-2 border-gray-300 shadow-2xl" src={URL.createObjectURL(img)}/>
                   </div>
                   <textarea placeholder="Write a cat-ption..." className="flex flex-col w-11/12 h-16 px-3 py-2 text-base text-pink-100 placeholder-pink-100 bg-indigo-300 border shadow-2xl rounded-md"></textarea>
