@@ -39,7 +39,7 @@ function FeedPost ({ id, nextPlease, isVisible }) {
   }, [isVisible, imageLoaded])
 
   return post ? (
-    <section className={`pb-8 transition-all duration-500 ease-in-out ${imageLoaded && isVisible ? 'opacity-100' : 'opacity-100'}`}>
+    <section className={`pb-8 transition-all duration-500 ease-in-out ${imageLoaded && isVisible ? 'opacity-100' : 'opacity-0'}`}>
       <div className="flex items-center p-2">
         <div className="flex w-10 h-10 rounded-full bg-gradient-to-r from-indigo-500 to-pink-300" >
           <img className="w-8 h-8 m-auto rounded-full" src={user.userPicture} alt=""/>
