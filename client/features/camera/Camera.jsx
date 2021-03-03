@@ -1,27 +1,23 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { AuthContext } from '../auth/GetAuthState'
+import { promptForGeoLoc } from '../map/geolocHelper'
 import { postImageToStorage, updateFirestore } from './cameraHelper'
 
 function Camera () {
   const [img, setImg] = useState(null)
   const [caption, setCaption] = useState('')
-  const [location, setLocation] = useState({ longitude: 0, latitude: 0 })
+  const location = useSelector(state => state.geoloc.location)
 
   const dispatch = useDispatch()
   const history = useHistory()
 
   const { currentUser } = useContext(AuthContext)
 
-  // todo: this should be global state -> prompted after opening app
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords: { longitude, latitude } }) => setLocation({ longitude, latitude }),
-      (err) => console.error(err),
-      { enableHighAccuracy: true }
-    )
+    promptForGeoLoc(dispatch)
   }, [])
 
   function addImg (e) {

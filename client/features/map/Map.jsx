@@ -1,42 +1,43 @@
 import React, { useState, useEffect } from 'react'
-import 'leaflet/dist/leaflet.css'
+import { useDispatch, useSelector } from 'react-redux'
 import L from 'leaflet'
 import 'leaflet.heat'
-import { addressPoints } from '../../static/addressPoints'
+import 'leaflet/dist/leaflet.css'
+
+import { fetchPosts, selectPosts } from '../feed/postsSlice'
+import { getMapPoints, updateLocation } from './geolocHelper'
+
 export default function Map () {
-  const [state, setState] = useState({
-    longitude: '',
-    latitude: ''
-  })
+  const posts = useSelector(selectPosts)
+  const [heatmap, setHeatMap] = useState(null)
+
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        setState({
-          longitude: position.coords.longitude,
-          latitude: position.coords.latitude
-        })
-      }, function (error) { console.log(error) },
-
-      {
-        enableHighAccuracy: true
-      }
-    )
-    var map = L.map('map', { doubleClickZoom: false }).locate({ setView: true, maxZoom: 16 })
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map)
-    const points = addressPoints
-      ? addressPoints.map((p) => {
-        return [p[0], p[1]]
-      })
-      : []
-
-    L.heatLayer(points).addTo(map)
+    dispatch(fetchPosts())
   }, [])
+
+  useEffect(() => {
+    const map = L.map('map', { doubleClickZoom: false })
+    const points = getMapPoints(posts)
+    const heatlayer = L.heatLayer(points, { radius: 30, gradient: { 0.0: '#FBCFE8', 0.3: '#EC4899', 1.0: '#818CF8' }, blur: 30 })
+
+    map.locate({ setView: true, maxZoom: 16 })
+    map.once('locationfound', (evt) => updateLocation(dispatch, evt))
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map)
+    heatlayer.addTo(map)
+
+    setHeatMap(heatlayer)
+  }, [])
+
+  useEffect(() => {
+    if (heatmap) heatmap.setLatLngs(getMapPoints(posts))
+  }, [posts])
 
   return (
     <div id="map" style={{ height: '100vh' }}></div>
-
   )
 }
