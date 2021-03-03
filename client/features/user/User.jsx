@@ -86,22 +86,24 @@ function User () {
 
   return (
     <>
-      <div className="items-center justify-center flex-1 h-full overflow-y-auto divide-y divide-gray-100">
+      <div className="flex-1 h-full overflow-y-auto divide-y divide-gray-100">
         <div className="flex rounded-lg">
-          <div className="flex flex-col items-center w-full h-screen bg-transparent mb-7">
+          <div className="flex flex-col items-center w-full bg-transparent flex-center-fix mb-7">
             {!img
-              ? <label htmlFor="image">
-                <img src={userDetails.userPicture} alt="" className="w-32 h-32 mt-5 border-2 border-gray-400 rounded-full" title="edit picture" />
+              ? (<>
+                <label htmlFor="image">
+                  <img src={userDetails.userPicture} alt="" className="w-32 h-32 mt-5 border-2 border-gray-400 rounded-full" title="edit picture" />
+                </label>
                 <input type="file" name="image" id="image" accept="image/*" className="invisible w-0 h-0" onChange={addImg}/>
-              </label>
+              </>)
               : (
-                <>
+                <div className="items-center justify-center flex-center-fix">
                   <img src={URL.createObjectURL(img)} alt="" className="w-32 h-32 mt-5 border-2 border-gray-400 rounded-full" title="edit picture" />
                   <div className="flex flex-row mt-5">
                     <button className="w-24 py-3 mb-2 mr-3 font-bold text-white bg-pink-400 rounded shadow-2xl" onClick={savePicture}>Save</button>
                     <button type="reset" className="w-24 py-3 mb-2 ml-3 font-bold text-white bg-pink-400 rounded shadow-2xl" onClick={cancelPhotoState}>Cancel</button>
                   </div>
-                </>
+                </div>
               )}
             {!isEditing
               ? <div><h1 className="p-4 ml-5 text-3xl text-gradient bg-gradient-to-r from-indigo-500 to-pink-300">{userDetails.username} <i className="text-xs fas fa-pen" onClick={handleUsername}></i></h1></div>
