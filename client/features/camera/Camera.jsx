@@ -94,7 +94,7 @@ function Camera () {
                       </svg>
                       <div>
                         <span className="mt-2 leading-normal text-white">Take a cat pic!</span>
-                        <input type='file' className="hidden" id='imageFile' capture='environment' accept='image/*' onChange={addImg}/>
+                        <input type='file' className="hidden" id='imageFile' accept='image/*' onChange={addImg}/>
                       </div>
                     </label>
                   </div>
