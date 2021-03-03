@@ -26,7 +26,6 @@ function getStorageImageURL (fileRef) {
 
 export function updateFirestore (currentUser, location, comments, photoUrl) {
   return firestore.collection('sightings').doc().set({
-    test: 'test',
     userID: currentUser.uid,
     dateTime: Date.now(),
     location,

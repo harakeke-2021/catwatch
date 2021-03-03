@@ -47,7 +47,6 @@ function User () {
   }
 
   const submitUsername = async () => {
-    console.log('My new username is: ', newUsername)
     const userPictureRef = app.firestore().collection('users').doc(`${currentUser.uid}`)
     await userPictureRef.update({
       username: newUsername
