@@ -8,6 +8,7 @@ import { fetchPosts, selectPosts } from '../feed/postsSlice'
 import { getMapPoints, updateLocation } from './geolocHelper'
 
 export default function Map () {
+  const location = useSelector(state => state.geoloc.location)
   const posts = useSelector(selectPosts)
   const [heatmap, setHeatMap] = useState(null)
 
@@ -18,7 +19,10 @@ export default function Map () {
   }, [])
 
   useEffect(() => {
-    const map = L.map('map', { doubleClickZoom: false })
+    const map = L.map('map', {
+      center: (location ? [location.latitude, location.longitude] : [-36.88354901996365, 174.75824076869182]),
+      doubleClickZoom: false
+    })
     const points = getMapPoints(posts)
     const heatlayer = L.heatLayer(points, { radius: 30, maxZoom: 5, gradient: { 0.0: '#FBCFE8', 0.3: '#EC4899', 1.0: '#818CF8' }, blur: 15 })
 
