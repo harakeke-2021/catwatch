@@ -27,6 +27,6 @@ export function getMapPoints (posts) {
   return posts.filter(post => !!post.location)
     .map(post => {
       const { latitude, longitude } = post.location
-      return [latitude, longitude]
+      return [latitude, longitude, 1]
     })
 }
